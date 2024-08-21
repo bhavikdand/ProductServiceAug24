@@ -1,6 +1,7 @@
 package com.example.ProductServiceAug24.services;
 
 import com.example.ProductServiceAug24.dtos.FakeStoreProductDto;
+import com.example.ProductServiceAug24.exceptions.ProductNotFoundException;
 import com.example.ProductServiceAug24.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class FakeStoreProductService implements ProductService{
 
     @Override
-    public Product getProductById(long id) {
+    public Product getProductById(long id) throws ProductNotFoundException{
         /*
         Take the id from the input, and call this endpoint:a
         https://fakestoreapi.com/products/ + id
@@ -17,6 +18,9 @@ public class FakeStoreProductService implements ProductService{
         String url = "https://fakestoreapi.com/products/" + id;
         RestTemplate restTemplate = new RestTemplate();
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(url, FakeStoreProductDto.class);
+        if(fakeStoreProductDto == null){
+            throw new ProductNotFoundException("Product with id:" + id + " was not found");
+        }
         return convertFakeStoreProductToProduct(fakeStoreProductDto);
     }
 
