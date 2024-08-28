@@ -1,5 +1,6 @@
 package com.example.ProductServiceAug24.dtos;
 
+
 public class FakeStoreProductDto {
     long id;
     String title;
