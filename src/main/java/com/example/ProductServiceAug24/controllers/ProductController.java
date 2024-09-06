@@ -39,4 +39,5 @@ public class ProductController {
         return productService.createProduct(requestDto.getName(), requestDto.getCategory(),
                 requestDto.getDescription());
     }
+
 }

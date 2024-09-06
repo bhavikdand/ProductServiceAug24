@@ -2,6 +2,7 @@ package com.example.ProductServiceAug24.services;
 
 import com.example.ProductServiceAug24.exceptions.ProductNotFoundException;
 import com.example.ProductServiceAug24.models.Product;
+import com.example.ProductServiceAug24.projections.ProductInfo;
 import com.example.ProductServiceAug24.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(long id) throws ProductNotFoundException {
+        ProductInfo productInfo = productRepository.getProductInfo(id);
+        System.out.println(productInfo.getDescp());
+        System.out.println(productInfo.getName());
+        System.out.println(productInfo.getId());
+
+
         Optional<Product> optionalProduct = productRepository.findById(id);
         if(optionalProduct.isPresent()){
             return optionalProduct.get();
@@ -42,6 +49,16 @@ public class ProductServiceImpl implements ProductService {
         product = productRepository.save(product);
         System.out.println(product.getId());
         return product;
+    }
+
+    public boolean deleteById(long id){
+        try{
+            productRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 
