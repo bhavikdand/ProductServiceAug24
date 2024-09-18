@@ -5,8 +5,11 @@ import com.example.ProductServiceAug24.exceptions.ProductNotFoundException;
 import com.example.ProductServiceAug24.models.Product;
 import com.example.ProductServiceAug24.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service("fakeStore")
 public class FakeStoreProductService implements ProductService{
@@ -39,5 +42,10 @@ public class FakeStoreProductService implements ProductService{
         product.setDescription(dto.getDescription());
         product.setName(dto.getTitle());
         return product;
+    }
+
+    @Override
+    public Page<Product> getAllProducts(int pageSize, int pageNum) {
+        return null;
     }
 }
