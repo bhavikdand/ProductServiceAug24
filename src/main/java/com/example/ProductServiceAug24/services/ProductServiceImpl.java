@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> getAllProducts(int pageSize, int pageNum) {
-
+        pageSize = Math.min(pageSize, 100);
         return productRepository.findAll(PageRequest.of(pageNum, pageSize,
                 Sort.by("name").descending().and(
                         Sort.by("category")
