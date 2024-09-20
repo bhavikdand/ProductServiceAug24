@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    @Qualifier("dbImpl")
+    @Qualifier("fakeStore")
     private ProductService productService;
     // GET /products/{id}
     @GetMapping("/{id}")
